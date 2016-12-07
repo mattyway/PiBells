@@ -13,3 +13,6 @@ hs_err_pid*
 
 # Don't ignore jars in libs folder
 !/libs/*.jar
+
+# Ignore output files
+/out/
