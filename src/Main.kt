@@ -8,9 +8,6 @@ import org.jfugue.temporal.TemporalPLP
 import java.io.OutputStream
 import java.io.PrintStream
 
-
-
-
 fun main(args: Array<String>) {
     val musicXml = File("./resources/jingle_bells.xml")
 
