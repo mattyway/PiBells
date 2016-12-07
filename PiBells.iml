@@ -9,6 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="com.pi4j:pi4j-core:1.1" level="project" />
+    <orderEntry type="library" name="pi4j" level="project" />
   </component>
 </module>
