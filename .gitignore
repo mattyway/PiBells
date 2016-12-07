@@ -11,8 +11,9 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Don't ignore jars in libs folder
-!/libs/*.jar
+# Don't ignore jars manually placed in lib folder
+!/lib/jfugue-5.0.7.jar
+!/lib/xom-1.2.10.jar
 
 # Ignore output files
 /out/

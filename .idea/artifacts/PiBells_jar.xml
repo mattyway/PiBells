@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/PiBells_jar</output-path>
     <root id="archive" name="BellPi.jar">
       <element id="module-output" name="PiBells" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/libs/xom-1.2.10.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jfugue-5.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/xom-1.2.10.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfugue-5.0.7.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-runtime.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar" path-in-jar="/" />
     </root>
