@@ -5,6 +5,9 @@ import org.jfugue.player.Player
 import org.jfugue.temporal.TemporalPLP
 import org.jfugue.theory.Note
 import org.staccato.StaccatoParserListener
+import rx.Emitter
+import rx.Observable
+import rx.Subscription
 import java.io.File
 import java.io.OutputStream
 import java.io.PrintStream
@@ -12,40 +15,28 @@ import java.io.PrintStream
 fun main(args: Array<String>) {
     val musicXml = File("./resources/jingle_bells.xml")
 
-    val musicXmlParser = MusicXmlParser()
-    val temporalParser = TemporalPLP()
-    val debugParser = DebugParserListener()
-    val gpioParser = GpioParserListener().apply { setup() }
-    val staccatoParser = StaccatoParserListener()
-    musicXmlParser.addParserListener(staccatoParser)
-    musicXmlParser.addParserListener(temporalParser)
-    temporalParser.addParserListener(debugParser)
-    temporalParser.addParserListener(gpioParser)
+    val music = Music()
 
-    val originalStream = System.out
+    music.getNotes().subscribe { note ->
+        println("Note parsed: tone = ${note.toneString} value = ${note.value}  duration = ${note.duration}  onVelocity = ${note.onVelocity}  offVelocity = ${note.offVelocity}")
+    }
 
-    val dummyStream = PrintStream(object : OutputStream() {
-        override fun write(b: Int) {
-            //NO-OP
-        }
-    })
+    val gpio: Gpio?
+    gpio = try {
+        Gpio()
+    } catch (e: java.lang.UnsatisfiedLinkError) {
+        println("Failed to setup GPIO. Is Pi4j installed?")
+        null
+    }
 
-    // MusicXmlParser is noisy. Redirect System.out so we don't have to read the output of MusicXmlParser
-    System.setOut(dummyStream)
-    musicXmlParser.parse(musicXml)
+    gpio?.subscribeTo(music.getNotes())
 
-    // Restore original System.out so that we can output to the console later
-    System.setOut(originalStream)
+    music.play(musicXml)
 
-    val player = Player()
-    val musicXMLPattern = staccatoParser.pattern
-    player.delayPlay(0, musicXMLPattern)
-    temporalParser.parse()
-
-    gpioParser.shutdown()
+    gpio?.shutdown()
 }
 
-class GpioParserListener : ParserListenerAdapter() {
+class Gpio() {
     data class PinDescriptor(
             val name: String,
             val number: Pin
@@ -65,8 +56,10 @@ class GpioParserListener : ParserListenerAdapter() {
     var gpio: GpioController? = null
     var pins: List<GpioPinDigitalOutput> = emptyList()
 
-    fun setup() {
-        println("Setting up pins")
+    private var subscription: Subscription? = null
+
+    init {
+        println("Setting up GPIO")
 
         // Create gpio controller
         gpio = GpioFactory.getInstance()
@@ -77,20 +70,73 @@ class GpioParserListener : ParserListenerAdapter() {
                 setShutdownOptions(true, PinState.LOW)
             }
         }
+
+    }
+
+    fun subscribeTo(notes: Observable<Note>) {
+        subscription = notes.subscribe { note ->
+            // Find the first pin with a name that matches the note
+            // TODO: highC isn't detected. Need to take into account the note's octave and not just match on the name
+            val pin = pins.firstOrNull { note.toneString?.contains(it.name) ?: false }
+
+            // Turn the pin on for 200ms then turn it off
+            pin?.pulse(200)
+        }
     }
 
     fun shutdown() {
-        println("Shutting down pins")
-
+        println("Shutting down GPIO")
+        subscription?.unsubscribe()
         gpio?.shutdown()
     }
+}
 
-    override fun onNoteParsed(note: Note) {
-        // Find the first pin with a name that matches the note
-        // TODO: highC isn't detected. Need to take into account the note's octave and not just match on the name
-        val pin = pins.firstOrNull { note.toneString?.contains(it.name) ?: false }
+class Music() {
+    val musicXmlParser = MusicXmlParser()
+    val temporalParser = TemporalPLP()
+    val staccatoParser = StaccatoParserListener()
 
-        // Turn the pin on for 200ms then turn it off
-        pin?.pulse(200)
+    init {
+        musicXmlParser.addParserListener(staccatoParser)
+        musicXmlParser.addParserListener(temporalParser)
+    }
+
+    fun getNotes(): Observable<Note> {
+        return Observable.fromEmitter<Note>({ emitter ->
+            val listener = object : ParserListenerAdapter() {
+                override fun onNoteParsed(note: Note) {
+                    emitter.onNext(note)
+                }
+            }
+
+            emitter.setCancellation {
+                temporalParser.removeParserListener(listener)
+            }
+            temporalParser.addParserListener(listener)
+
+        }, Emitter.BackpressureMode.BUFFER)
+    }
+
+    fun play(musicXml: File) {
+        val originalStream = System.out
+
+        val dummyStream = PrintStream(object : OutputStream() {
+            override fun write(b: Int) {
+                //NO-OP
+            }
+        })
+
+        // MusicXmlParser is noisy. Redirect System.out so we don't have to read the output of MusicXmlParser
+        System.setOut(dummyStream)
+        musicXmlParser.parse(musicXml)
+
+        // Restore original System.out so that we can output to the console later
+        System.setOut(originalStream)
+
+        val player = Player()
+        val musicXMLPattern = staccatoParser.pattern
+        player.delayPlay(0, musicXMLPattern)
+        temporalParser.parse()
     }
 }
+
