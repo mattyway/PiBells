@@ -10,5 +10,6 @@
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="pi4j" level="project" />
+    <orderEntry type="library" name="io.reactivex:rxjava:1.2.3" level="project" />
   </component>
 </module>
