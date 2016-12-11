@@ -6,7 +6,7 @@ fun main(args: Array<String>) {
     val music = Music()
 
     music.getNotes().subscribe { note ->
-        println("Note parsed: tone = ${note.toneString} value = ${note.value}  duration = ${note.duration}  onVelocity = ${note.onVelocity}  offVelocity = ${note.offVelocity}")
+        println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
     }
 
     val gpio: Gpio?
