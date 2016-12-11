@@ -1,4 +1,5 @@
 import rx.Observable
+import rx.schedulers.Schedulers
 import java.io.File
 
 fun main(args: Array<String>) {
@@ -6,9 +7,11 @@ fun main(args: Array<String>) {
 
     val music = Music()
 
-    music.getNotes().subscribe { note ->
-        println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
-    }
+    music.getNotes()
+            .observeOn(Schedulers.newThread())
+            .subscribe { note ->
+                println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
+            }
 
     val gpio: Gpio?
     gpio = try {
