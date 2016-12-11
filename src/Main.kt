@@ -1,6 +1,7 @@
 import rx.Observable
 import rx.schedulers.Schedulers
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>) {
     val musicXml = File("./resources/jingle_bells.xml")
@@ -28,6 +29,8 @@ fun main(args: Array<String>) {
     val musicObservable: Observable<Any> = Observable.from(listOf(scaleString, musicXml))
 
     musicObservable
+            .concatMap { Observable.just(it).delay(1, TimeUnit.SECONDS) }
+            .toBlocking()
             .subscribe({ it ->
                 if (it is File) {
                     music.play(it)
