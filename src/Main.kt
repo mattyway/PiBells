@@ -1,3 +1,4 @@
+import rx.Observable
 import java.io.File
 
 fun main(args: Array<String>) {
@@ -19,7 +20,21 @@ fun main(args: Array<String>) {
 
     gpio?.subscribeTo(music.getNotes())
 
-    music.play(musicXml)
+    val scaleString = "C3q D3q E3q F3q G3q A3q B3q C4q"
+
+    val musicObservable: Observable<Any> = Observable.from(listOf(scaleString, musicXml))
+
+    musicObservable
+            .subscribe({ it ->
+                if (it is File) {
+                    music.play(it)
+                } else if (it is String) {
+                    music.play(it)
+                }
+            }, { e ->
+                println("Error playing back music: $e")
+            })
+
 
     gpio?.shutdown()
 }
