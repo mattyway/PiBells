@@ -2,6 +2,8 @@ import com.pi4j.io.gpio.*
 import org.jfugue.theory.Note
 import rx.Observable
 import rx.Subscription
+import rx.schedulers.Schedulers
+import java.util.concurrent.Executors
 
 class Gpio() {
     data class PinDescriptor(
@@ -41,14 +43,32 @@ class Gpio() {
     }
 
     fun subscribeTo(notes: Observable<Note>) {
-        subscription = notes.subscribe { note ->
-            // Find the first pin with a name that matches the note
-            // TODO: highC isn't detected. Need to take into account the note's octave and not just match on the name
-            val pin = pins.firstOrNull { note.toneString?.contains(it.name) ?: false }
+        val concurrentLimit = 4
+        val executor = Executors.newFixedThreadPool(concurrentLimit)
+        val scheduler = Schedulers.from(executor)
+        subscription = notes
+                .onBackpressureDrop({
+                    println("Had to drop a note")
+                })
+                .flatMap({ it ->
+                    Observable.just(it)
+                            .subscribeOn(scheduler)
+                            .map { note ->
+                                // Find the first pin with a name that matches the note
+                                // TODO: highC isn't detected. Need to take into account the note's octave and not just match on the name
+                                val pin = pins.firstOrNull { note.toneString?.contains(it.name) ?: false }
 
-            // Turn the pin on for 200ms then turn it off
-            pin?.pulse(200)
-        }
+                                // Turn the pin on for 200ms then turn it off
+                                pin?.pulse(200, true)
+                            }
+                }, concurrentLimit)
+                .doOnUnsubscribe {
+                    executor.shutdown()
+                }
+                .doAfterTerminate {
+                    executor.shutdown()
+                }
+                .subscribe()
     }
 
     fun shutdown() {
