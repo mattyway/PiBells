@@ -4,7 +4,25 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>) {
-    val musicXml = File("./resources/jingle_bells.xml")
+    val resourceDir = File("./resources")
+    val files = resourceDir.listFiles { dir, name -> name.endsWith(".xml") }
+
+    println("Select file")
+    files.forEachIndexed { index, file ->
+        println("${index + 1}: ${file.name}")
+    }
+
+    val input = readLine()
+    val selectedIndex = input?.toInt()?.minus(1)
+
+    if(selectedIndex == null || selectedIndex < 0 || selectedIndex >= files.size) {
+        println("Invalid input")
+        return
+    }
+
+    val musicXml = files[selectedIndex]
+
+    println("Playing ${musicXml.name}")
 
     val music = Music()
 
