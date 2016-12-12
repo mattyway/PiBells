@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
 
     gpio?.subscribeTo(music.getNotes())
 
-    val scaleString = "C3q D3q E3q F3q G3q A3q B3q C4q"
+    val scaleString = "C4q D4q E4q F4q G4q A4q B4q C5q"
 
     val musicObservable: Observable<Any> = Observable.from(listOf(scaleString, musicXml))
 
