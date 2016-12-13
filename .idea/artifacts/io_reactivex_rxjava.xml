@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="io_reactivex_rxjava">
+    <output-path>$PROJECT_DIR$/out/artifacts/io_reactivex_rxjava</output-path>
+    <root id="root">
+      <element id="library" level="project" name="io.reactivex:rxjava:1.2.3" />
+    </root>
+  </artifact>
+</component>
