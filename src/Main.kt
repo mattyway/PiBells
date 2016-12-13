@@ -12,6 +12,9 @@ val subscriptions = CompositeSubscription()
 fun main(args: Array<String>) {
     setup()
 
+    val scaleString = "C4q D4q E4q F4q G4q A4q B4q C5q"
+    music.play(scaleString)
+
     val resourceDir = File("./resources")
     val files = resourceDir.listFiles { dir, name -> name.endsWith(".xml") }
 
@@ -32,9 +35,7 @@ fun main(args: Array<String>) {
 
     println("Playing ${musicXml.name}")
 
-    val scaleString = "C4q D4q E4q F4q G4q A4q B4q C5q"
-
-    val musicObservable: Observable<Any> = Observable.from(listOf(scaleString, musicXml))
+    val musicObservable: Observable<Any> = Observable.from(listOf(musicXml))
 
     musicObservable
             .concatMap { Observable.just(it).delay(1, TimeUnit.SECONDS) }
