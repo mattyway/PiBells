@@ -108,7 +108,7 @@
     </system-layout>
    </print>
    <attributes>
-    <divisions>256</divisions>
+    <divisions>64</divisions>
     <key color="#000000">
      <fifths>0</fifths>
      <mode>major</mode>
@@ -139,7 +139,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -152,7 +152,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -164,7 +164,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -179,7 +179,7 @@
      <step>E</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -195,7 +195,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -208,7 +208,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -220,7 +220,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -235,7 +235,7 @@
      <step>E</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -251,7 +251,7 @@
      <step>D</step>
      <octave>4</octave>
     </pitch>
-    <duration>512</duration>
+    <duration>128</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -263,7 +263,7 @@
      <step>D</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -278,7 +278,7 @@
      <step>B</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -294,7 +294,7 @@
      <step>C</step>
      <octave>5</octave>
     </pitch>
-    <duration>512</duration>
+    <duration>128</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -306,7 +306,7 @@
      <step>C</step>
      <octave>5</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -321,7 +321,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -337,7 +337,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>512</duration>
+    <duration>128</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -349,7 +349,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -376,7 +376,7 @@
      <step>C</step>
      <octave>5</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -389,7 +389,7 @@
      <step>B</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -401,7 +401,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -416,7 +416,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -429,7 +429,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -441,7 +441,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -456,7 +456,7 @@
      <step>E</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -472,7 +472,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>512</duration>
+    <duration>128</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -484,7 +484,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -499,7 +499,7 @@
      <step>C</step>
      <octave>5</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -512,7 +512,7 @@
      <step>B</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -524,7 +524,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -539,7 +539,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -552,7 +552,7 @@
      <step>A</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -564,7 +564,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -579,7 +579,7 @@
      <step>E</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -607,7 +607,7 @@
      <step>D</step>
      <octave>4</octave>
     </pitch>
-    <duration>512</duration>
+    <duration>128</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -619,7 +619,7 @@
      <step>D</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -634,7 +634,7 @@
      <step>F</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -646,7 +646,7 @@
      <step>D</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -658,7 +658,7 @@
      <step>B</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -673,7 +673,7 @@
      <step>C</step>
      <octave>5</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -689,7 +689,7 @@
      <step>E</step>
      <octave>4</octave>
     </pitch>
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>half</type>
@@ -705,7 +705,7 @@
      <step>C</step>
      <octave>5</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -717,7 +717,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -729,7 +729,7 @@
      <step>E</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -744,7 +744,7 @@
      <step>G</step>
      <octave>4</octave>
     </pitch>
-    <duration>384</duration>
+    <duration>96</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -757,7 +757,7 @@
      <step>F</step>
      <octave>4</octave>
     </pitch>
-    <duration>128</duration>
+    <duration>32</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>eighth</type>
@@ -769,7 +769,7 @@
      <step>D</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -784,7 +784,7 @@
      <step>C</step>
      <octave>4</octave>
     </pitch>
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -793,7 +793,7 @@
    </note>
    <note default-x="53">
     <rest />
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -801,7 +801,7 @@
    </note>
    <note default-x="91">
     <rest />
-    <duration>256</duration>
+    <duration>64</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>quarter</type>
@@ -812,7 +812,7 @@
   <measure number="24" width="109">
    <note>
     <rest />
-    <duration>768</duration>
+    <duration>192</duration>
     <instrument id="P1-I1" />
     <voice>1</voice>
     <type>whole</type>
