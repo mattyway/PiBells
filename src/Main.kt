@@ -50,7 +50,12 @@ private fun loop() {
         }
 
         val input = readLine()
-        val selectedIndex = input?.toInt()?.minus(1)
+        val selectedIndex = try {
+            input?.toInt()?.minus(1)
+        } catch(e: Exception) {
+            println("Invalid input")
+            break
+        }
 
         if (selectedIndex == null || selectedIndex < 0 || selectedIndex >= files.size) {
             println("Invalid input")
