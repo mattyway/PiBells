@@ -3,7 +3,12 @@ import rx.schedulers.Schedulers
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+var gpio: Gpio? = null
+val music = Music()
+
 fun main(args: Array<String>) {
+    setup()
+
     val resourceDir = File("./resources")
     val files = resourceDir.listFiles { dir, name -> name.endsWith(".xml") }
 
@@ -23,24 +28,6 @@ fun main(args: Array<String>) {
     val musicXml = files[selectedIndex]
 
     println("Playing ${musicXml.name}")
-
-    val music = Music()
-
-    music.getNotes()
-            .observeOn(Schedulers.newThread())
-            .subscribe { note ->
-                println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
-            }
-
-    val gpio: Gpio?
-    gpio = try {
-        Gpio()
-    } catch (e: java.lang.UnsatisfiedLinkError) {
-        println("Failed to setup GPIO. Is Pi4j installed?")
-        null
-    }
-
-    gpio?.subscribeTo(music.getNotes())
 
     val scaleString = "C4q D4q E4q F4q G4q A4q B4q C5q"
 
@@ -63,3 +50,19 @@ fun main(args: Array<String>) {
     gpio?.shutdown()
 }
 
+private fun setup() {
+    gpio = try {
+        Gpio()
+    } catch (e: UnsatisfiedLinkError) {
+        println("Failed to setup GPIO. Is Pi4j installed?")
+        null
+    }
+
+    music.getNotes()
+            .observeOn(Schedulers.newThread())
+            .subscribe { note ->
+                println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
+            }
+
+    gpio?.subscribeTo(music.getNotes())
+}
