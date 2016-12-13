@@ -42,6 +42,22 @@ class Gpio() {
 
     }
 
+    private fun getPinForNote(note: Note): GpioPinDigitalOutput? {
+        // Map notes directly to pins.
+        // Only uses notes from C4 to C5 excluding sharp/flat notes.
+        return when (note.value.toInt()) {
+            48 -> pins.firstOrNull { it.name == "C" }
+            50 -> pins.firstOrNull { it.name == "D" }
+            52 -> pins.firstOrNull { it.name == "E" }
+            53 -> pins.firstOrNull { it.name == "F" }
+            55 -> pins.firstOrNull { it.name == "G" }
+            57 -> pins.firstOrNull { it.name == "A" }
+            59 -> pins.firstOrNull { it.name == "B" }
+            60 -> pins.firstOrNull { it.name == "highC" }
+            else -> null
+        }
+    }
+
     fun subscribeTo(notes: Observable<Note>) {
         val concurrentLimit = 4
         val executor = Executors.newFixedThreadPool(concurrentLimit)
@@ -54,12 +70,19 @@ class Gpio() {
                     Observable.just(it)
                             .subscribeOn(scheduler)
                             .map { note ->
-                                // Find the first pin with a name that matches the note
-                                // TODO: highC isn't detected. Need to take into account the note's octave and not just match on the name
-                                val pin = pins.firstOrNull { note.toneString?.contains(it.name) ?: false }
+                                if (note.isRest) {
+                                    return@map
+                                }
 
-                                // Turn the pin on for 200ms then turn it off
-                                pin?.pulse(200, true)
+                                // Find the first pin with a name that matches the note
+                                val pin = getPinForNote(note)
+
+                                if (pin != null) {
+                                    // Turn the pin on for 200ms then turn it off
+                                    pin.pulse(200, true)
+                                } else {
+                                    println("Couldn't find a pin for note ${note.value}")
+                                }
                             }
                 }, concurrentLimit)
                 .doOnUnsubscribe {
