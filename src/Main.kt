@@ -1,10 +1,13 @@
 import rx.Observable
 import rx.schedulers.Schedulers
+import rx.subscriptions.CompositeSubscription
 import java.io.File
 import java.util.concurrent.TimeUnit
 
 var gpio: Gpio? = null
 val music = Music()
+
+val subscriptions = CompositeSubscription()
 
 fun main(args: Array<String>) {
     setup()
@@ -48,6 +51,7 @@ fun main(args: Array<String>) {
 
 
     gpio?.shutdown()
+    subscriptions.unsubscribe()
 }
 
 private fun setup() {
@@ -62,6 +66,9 @@ private fun setup() {
             .observeOn(Schedulers.newThread())
             .subscribe { note ->
                 println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
+            }
+            .apply {
+                subscriptions.add(this)
             }
 
     gpio?.subscribeTo(music.getNotes())
