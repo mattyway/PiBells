@@ -25,6 +25,8 @@ class Music() {
     val player = ManagedPlayer()
     val passthroughParser = PassthroughListener()
 
+    var enableMidiPlayback = false
+
     fun getNotes(): Observable<Note> {
         return Observable.fromEmitter<Note>({ emitter ->
             val listener = object : ParserListenerAdapter() {
@@ -67,8 +69,10 @@ class Music() {
         // Restore original System.out so that we can output to the console later
         System.setOut(originalStream)
 
-        thread {
-            player.start(midiParserListener.sequence)
+        if (enableMidiPlayback) {
+            thread {
+                player.start(midiParserListener.sequence)
+            }
         }
         temporalParser.parse()
     }
@@ -86,8 +90,10 @@ class Music() {
 
         stacattoParser.parse(musicString)
 
-        thread {
-            player.start(midiParserListener.sequence)
+        if (enableMidiPlayback) {
+            thread {
+                player.start(midiParserListener.sequence)
+            }
         }
         temporalParser.parse()
     }
