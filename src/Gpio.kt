@@ -12,14 +12,14 @@ class Gpio() {
     )
 
     val pinDescriptors = listOf(
-            PinDescriptor("C", RaspiPin.GPIO_01),
-            PinDescriptor("D", RaspiPin.GPIO_02),
-            PinDescriptor("E", RaspiPin.GPIO_03),
+            PinDescriptor("C", RaspiPin.GPIO_27),
+            PinDescriptor("D", RaspiPin.GPIO_26),
+            PinDescriptor("E", RaspiPin.GPIO_06),
             PinDescriptor("F", RaspiPin.GPIO_04),
-            PinDescriptor("G", RaspiPin.GPIO_05),
-            PinDescriptor("A", RaspiPin.GPIO_06),
-            PinDescriptor("B", RaspiPin.GPIO_07),
-            PinDescriptor("highC", RaspiPin.GPIO_00)
+            PinDescriptor("G", RaspiPin.GPIO_01),
+            PinDescriptor("A", RaspiPin.GPIO_14),
+            PinDescriptor("B", RaspiPin.GPIO_00),
+            PinDescriptor("highC", RaspiPin.GPIO_07)
     )
 
     var gpio: GpioController? = null
