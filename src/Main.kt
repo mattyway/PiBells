@@ -46,7 +46,7 @@ private fun setup() {
 private fun loop() {
     while (true) {
         val resourceDir = File("./resources")
-        val files = resourceDir.listFiles { dir, name -> name.endsWith(".xml") }
+        val files: List<File> = resourceDir.listFiles { dir, name -> name.endsWith(".xml") }.sortedBy { it.name }
 
         println("Select file")
         files.forEachIndexed { index, file ->
