@@ -64,7 +64,7 @@ class Gpio() {
         val scheduler = Schedulers.from(executor)
         subscription = notes
                 .onBackpressureDrop({
-                    println("Had to drop a note")
+                    println("Couldn't play a note ${it.value}")
                 })
                 .flatMap({ it ->
                     Observable.just(it)
