@@ -8,12 +8,12 @@ fun main(args: Array<String>) {
     var loops = 0
 
     while (loops < 3) {
-        gpio.pins[index].pulse(150, true)
+        gpio.bellPins[index].pulse(150, true)
 
         index += increment
 
-        if (index >= gpio.pins.size) {
-            index = gpio.pins.size - 2
+        if (index >= gpio.bellPins.size) {
+            index = gpio.bellPins.size - 2
             increment = -1
         }
         if (index < 0) {

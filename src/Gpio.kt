@@ -11,7 +11,7 @@ class Gpio() {
             val number: com.pi4j.io.gpio.Pin
     )
 
-    val pinDescriptors = listOf(
+    val bellPinDescriptors = listOf(
             PinDescriptor("C", RaspiPin.GPIO_27),
             PinDescriptor("D", RaspiPin.GPIO_26),
             PinDescriptor("E", RaspiPin.GPIO_06),
@@ -23,7 +23,7 @@ class Gpio() {
     )
 
     var gpio: GpioController? = null
-    var pins: List<GpioPinDigitalOutput> = emptyList()
+    var bellPins: List<GpioPinDigitalOutput> = emptyList()
 
     var pulseLength: Long = 200
 
@@ -36,7 +36,7 @@ class Gpio() {
         gpio = GpioFactory.getInstance()
 
         // Create the pin objects from the pin descriptors
-        pins = pinDescriptors.map {
+        bellPins = bellPinDescriptors.map {
             gpio!!.provisionDigitalOutputPin(it.number, it.name, PinState.LOW).apply {
                 setShutdownOptions(true, PinState.LOW)
             }
@@ -48,14 +48,14 @@ class Gpio() {
         // Map notes directly to pins.
         // Only uses notes from C4 to C5 excluding sharp/flat notes.
         return when (note.value.toInt()) {
-            48 -> pins.firstOrNull { it.name == "C" }
-            50 -> pins.firstOrNull { it.name == "D" }
-            52 -> pins.firstOrNull { it.name == "E" }
-            53 -> pins.firstOrNull { it.name == "F" }
-            55 -> pins.firstOrNull { it.name == "G" }
-            57 -> pins.firstOrNull { it.name == "A" }
-            59 -> pins.firstOrNull { it.name == "B" }
-            60 -> pins.firstOrNull { it.name == "highC" }
+            48 -> bellPins.firstOrNull { it.name == "C" }
+            50 -> bellPins.firstOrNull { it.name == "D" }
+            52 -> bellPins.firstOrNull { it.name == "E" }
+            53 -> bellPins.firstOrNull { it.name == "F" }
+            55 -> bellPins.firstOrNull { it.name == "G" }
+            57 -> bellPins.firstOrNull { it.name == "A" }
+            59 -> bellPins.firstOrNull { it.name == "B" }
+            60 -> bellPins.firstOrNull { it.name == "highC" }
             else -> null
         }
     }
