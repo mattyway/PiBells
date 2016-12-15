@@ -42,6 +42,8 @@ class Music() {
     }
 
     fun play(musicXml: File) {
+        println("Playing '${musicXml.name}'")
+
         val musicXmlParser = MusicXmlParser()
         val midiParserListener = MidiParserListener()
         val temporalParser = TemporalPLP()
@@ -72,6 +74,8 @@ class Music() {
     }
 
     fun play(musicString: String) {
+        println("Playing music string $musicString")
+
         val stacattoParser = StaccatoParser()
         val midiParserListener = MidiParserListener()
         val temporalParser = TemporalPLP()
