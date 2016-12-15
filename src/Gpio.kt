@@ -25,6 +25,8 @@ class Gpio() {
     var gpio: GpioController? = null
     var pins: List<GpioPinDigitalOutput> = emptyList()
 
+    var pulseLength: Long = 200
+
     private var subscription: Subscription? = null
 
     init {
@@ -78,8 +80,8 @@ class Gpio() {
                                 val pin = getPinForNote(note)
 
                                 if (pin != null) {
-                                    // Turn the pin on for 200ms then turn it off
-                                    pin.pulse(200, true)
+                                    // Turn the pin on then turn it off
+                                    pin.pulse(pulseLength, true)
                                 } else {
                                     println("Couldn't find a pin for note ${note.value}")
                                 }
