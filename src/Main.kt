@@ -7,6 +7,8 @@ val music = Music()
 
 val subscriptions = CompositeSubscription()
 
+val enableNoteLogging: Boolean = false
+
 fun main(args: Array<String>) {
     setup()
 
@@ -27,14 +29,16 @@ private fun setup() {
         null
     }
 
-    music.getNotes()
-            .observeOn(Schedulers.newThread())
-            .subscribe { note ->
-                println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
-            }
-            .apply {
-                subscriptions.add(this)
-            }
+    if (enableNoteLogging) {
+        music.getNotes()
+                .observeOn(Schedulers.newThread())
+                .subscribe { note ->
+                    println("Note parsed: tone = ${note.toneString} octave = ${note.octave} value = ${note.value}  duration = ${note.duration}")
+                }
+                .apply {
+                    subscriptions.add(this)
+                }
+    }
 
     gpio?.subscribeTo(music.getNotes())
 }
