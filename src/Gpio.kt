@@ -1,4 +1,5 @@
 import com.pi4j.io.gpio.*
+import com.pi4j.io.gpio.event.GpioPinListenerDigital
 import org.jfugue.theory.Note
 import rx.Observable
 import rx.Subscription
@@ -22,8 +23,23 @@ class Gpio() {
             PinDescriptor("highC", RaspiPin.GPIO_07)
     )
 
+    val keypadOutputPinDescriptors = listOf(
+            PinDescriptor("column1", RaspiPin.GPIO_21),
+            PinDescriptor("column2", RaspiPin.GPIO_23),
+            PinDescriptor("column3", RaspiPin.GPIO_25)
+    )
+
+    val keypadInputPinDescriptors = listOf(
+            PinDescriptor("row1", RaspiPin.GPIO_22),
+            PinDescriptor("row2", RaspiPin.GPIO_29),
+            PinDescriptor("row3", RaspiPin.GPIO_28),
+            PinDescriptor("row4", RaspiPin.GPIO_24)
+    )
+
     var gpio: GpioController? = null
     var bellPins: List<GpioPinDigitalOutput> = emptyList()
+    var keypadOutputPins: List<GpioPinDigitalOutput> = emptyList()
+    var keypadInputPins: List<GpioPinDigitalInput> = emptyList()
 
     var pulseLength: Long = 200
 
@@ -42,6 +58,20 @@ class Gpio() {
             }
         }
 
+        keypadOutputPins = keypadOutputPinDescriptors.map {
+            gpio!!.provisionDigitalOutputPin(it.number, it.name, PinState.LOW).apply {
+                setShutdownOptions(true, PinState.LOW)
+            }
+        }
+
+        keypadInputPins = keypadInputPinDescriptors.map {
+            gpio!!.provisionDigitalInputPin(it.number, it.name).apply {
+                setShutdownOptions(true)
+                addListener(GpioPinListenerDigital { event ->
+                    println("GPIO PIN STATE CHANGE: ${event.pin.name} = ${event.state}")
+                })
+            }
+        }
     }
 
     private fun getPinForNote(note: Note): GpioPinDigitalOutput? {
