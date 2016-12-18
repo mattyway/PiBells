@@ -101,17 +101,18 @@ class Gpio() {
                 .flatMap({ it ->
                     Observable.just(it)
                             .subscribeOn(scheduler)
-                            .map { note ->
-                                if (note.isRest) {
-                                    return@map
-                                }
-
-                                // Find the first pin with a name that matches the note
+                            .doOnNext { note ->
                                 val pin = getPinForNote(note)
-
                                 if (pin != null) {
-                                    // Turn the pin on then turn it off
-                                    pin.pulse(pulseLength, true)
+
+                                    println("Setting pin ${pin.name} to high on thread ${Thread.currentThread().name} at ${System.currentTimeMillis()}")
+                                    pin.high()
+
+                                    Thread.sleep(pulseLength)
+
+                                    pin.low()
+                                    println("Setting pin ${pin.name} to low on thread ${Thread.currentThread().name}  at ${System.currentTimeMillis()}")
+
                                 } else {
                                     println("Couldn't find a pin for note ${note.value}")
                                 }
