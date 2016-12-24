@@ -9,10 +9,11 @@ val subscriptions = CompositeSubscription()
 
 val enableNoteLogging: Boolean = false
 
+val scaleString = "C4q D4q E4q F4q G4q A4q B4q C5q"
+
 fun main(args: Array<String>) {
     setup()
 
-    val scaleString = "C4q D4q E4q F4q G4q A4q B4q C5q"
     music.play(scaleString)
 
     loop()
@@ -52,6 +53,7 @@ private fun loop() {
         files.forEachIndexed { index, file ->
             println("${index + 1}: ${file.name}")
         }
+        println("${files.size + 1}: Scale")
 
         val input = readLine()
         val selectedIndex = try {
@@ -61,13 +63,17 @@ private fun loop() {
             break
         }
 
-        if (selectedIndex == null || selectedIndex < 0 || selectedIndex >= files.size) {
+        if (selectedIndex == null) {
             println("Invalid input")
             break
         }
 
-        val file = files[selectedIndex]
-        music.play(file)
+        if (selectedIndex == files.size) {
+            music.play(scaleString)
+        } else if (selectedIndex >= 0 && selectedIndex < files.size) {
+            val file = files[selectedIndex]
+            music.play(file)
+        }
     }
 }
 
