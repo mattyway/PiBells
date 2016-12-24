@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="Zip">
+    <output-path>$PROJECT_DIR$/out/artifacts/Zip</output-path>
+    <root id="root">
+      <element id="archive" name="PiBells.zip">
+        <element id="directory" name="PiBells_jar">
+          <element id="artifact" artifact-name="Resources" />
+          <element id="artifact" artifact-name="PiBells:jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
