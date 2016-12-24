@@ -42,6 +42,7 @@ class Gpio() {
     var keypadInputPins: List<GpioPinDigitalInput> = emptyList()
 
     var pulseLength: Long = 200
+    var enablePinLogging: Boolean = false
 
     private var subscription: Subscription? = null
 
@@ -68,7 +69,9 @@ class Gpio() {
             gpio!!.provisionDigitalInputPin(it.number, it.name).apply {
                 setShutdownOptions(true)
                 addListener(GpioPinListenerDigital { event ->
-                    println("GPIO PIN STATE CHANGE: ${event.pin.name} = ${event.state}")
+                    if (enablePinLogging) {
+                        println("GPIO PIN STATE CHANGE: ${event.pin.name} = ${event.state}")
+                    }
                 })
             }
         }
@@ -105,14 +108,17 @@ class Gpio() {
                                 val pin = getPinForNote(note)
                                 if (pin != null) {
 
-                                    println("Setting pin ${pin.name} to high on thread ${Thread.currentThread().name} at ${System.currentTimeMillis()}")
+                                    if (enablePinLogging) {
+                                        println("Setting pin ${pin.name} to high on thread ${Thread.currentThread().name} at ${System.currentTimeMillis()}")
+                                    }
                                     pin.high()
 
                                     Thread.sleep(pulseLength)
 
                                     pin.low()
-                                    println("Setting pin ${pin.name} to low on thread ${Thread.currentThread().name}  at ${System.currentTimeMillis()}")
-
+                                    if (enablePinLogging) {
+                                        println("Setting pin ${pin.name} to low on thread ${Thread.currentThread().name}  at ${System.currentTimeMillis()}")
+                                    }
                                 } else {
                                     println("Couldn't find a pin for note ${note.value}")
                                 }
